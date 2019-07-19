@@ -1,0 +1,85 @@
+#ifndef STATE_H
+#define STATE_H
+
+
+
+#include <vector>
+#include <string>
+
+#include<QList>
+#include"object.h"
+
+#include<QGraphicsView>
+#include<QGraphicsItem>
+class Edge;
+class scenegraphic;
+
+class State:public Object,public QGraphicsItem
+{
+private:
+    std::string name;
+    
+    QList<Edge * > Edges;
+    scenegraphic *sc;
+
+    QPoint r;
+    int rad = 70;
+    int x;
+    int y;
+    static bool ActiveState;
+protected:
+
+    // overriding mouse events
+    //     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+
+    //     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+
+public:
+
+    void addEdge(Edge *edge)
+    {
+        Edges << edge;
+
+    }
+    QPoint & GetPoint(){
+        return r;
+    }
+    static bool &GetActiveState(){
+        return ActiveState;
+    }
+    QRectF boundingRect() const;
+    void AddEdge(Edge *);
+    QList<Edge *> edges() const;
+    QList< std::multimap<std::string,State>> GetEdges();
+    void paint(QPainter *painter,const QStyleOptionGraphicsItem *option,QWidget *widget);
+    //virtual void draw( QPainter );
+
+
+
+
+    //     State(scenegraphic *);
+    //     virtual ~State();
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif // STATE_H
