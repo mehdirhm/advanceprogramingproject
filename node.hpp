@@ -7,47 +7,40 @@
 #include <string>
 #include<QList>
 #include<QGraphicsView>
-#include<QGraphicsItem>
+#include <QGraphicsItem>
+
 class Edge;
 class scenegraphic;
 
 class Node: public QGraphicsItem
 {
 private:
-    std::string name;
-
-
-    QList<Edge * > Edges;
-    scenegraphic *sc;
-
+    QList<Edge * > edgeList;
     QPointF center;
-    float x;
-    float y;
-protected:
 
-    // overriding mouse events
-    //     void mousePressEvent(QGraphicsSceneMouseEvent *event);
-
-    //     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 public:
-    Node();
+    Node( qreal ,qreal );
 
-    void set_X(float x);
-    void set_Y(float y);
-    float  get_X(void);
-    float  get_Y(void);
+    QRectF boundingRect() const override;
+    QPainterPath shape() const override;
+
+    void set_X(qreal x);
+    void set_Y(qreal y);
+    qreal  get_X(void);
+    qreal  get_Y(void);
     void setCenterPoint( QPointF );
     QPointF getCenterPoint( void );
 
+
     void addEdge(Edge *edge);
 
-    QRectF boundingRect() const;
-    void AddEdge(Edge *);
-    QList<Edge *> edges() const;
-    QList< std::multimap<std::string,Node>> GetEdges();
+    QList< Edge* > getEdges();
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option,QWidget *widget);
-    //virtual void draw( QPainter );
-    //     Node(scenegraphic *);
+
+protected:
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 };
 
 

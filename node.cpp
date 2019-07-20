@@ -3,61 +3,92 @@
 #include"scenegraphic.h"
 #include "mainwindow.h"
 #include<QPainter>
-#define RAD 40
+#include <QGraphicsItem>
+#include <QGraphicsEllipseItem>
+#define RAD 35
 
 
-Node::Node()
-    : QGraphicsItem ()
+Node::Node( qreal x, qreal y )
+    : QGraphicsItem ( nullptr )
 {
     setFlag(ItemIsMovable);
     setFlag(ItemSendsGeometryChanges);
-//    setCacheMode(DeviceCoordinateCache);
-//    setZValue(-1);
+    setCacheMode(DeviceCoordinateCache);
+    center.setX( x );
+    center.setY( y );
 }
 
-void Node::AddEdge(Edge *edge){
-    Edges<<edge;
+QRectF Node::boundingRect() const {
+    QRectF rect( center.x() -RAD/2 ,center.y() - RAD/2 ,RAD ,RAD );
+    return rect;
 }
 
-QList<Edge *> Node::edges() const
+QPainterPath Node::shape() const
 {
-    return Edges;
+    QPainterPath path;
+    path.addEllipse( center ,RAD/2 ,RAD/2 );
+    return path;
 }
-
 
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
 
-    QRectF rect = boundingRect();
     painter->setRenderHint(QPainter::Antialiasing, true);
-    painter->setPen(QPen(Qt::black, 3, Qt::DashDotLine ,Qt::RoundCap));
+//    painter->setPen(QPen(Qt::black, 3, Qt::DashDotLine ,Qt::RoundCap));
     painter->setBrush(QBrush(Qt::green, Qt::SolidPattern));
-    painter->drawEllipse(rect);
-    this->x = center.x() + RAD / 2;
-    this->y = center.y() + RAD / 2;
-}
+    painter->drawEllipse( boundingRect() );
+    painter->setBrush(QBrush() );
 
-QRectF Node::boundingRect() const
-{
-    return QRectF(center.x() ,center.y() ,RAD ,RAD );
-}
-
-void Node::set_X(float x){
-    center.setX( x );
-}
-void Node::set_Y(float y){
-    center.setY( y );
-}
-float Node::get_X(void){
-    return center.x();
-}
-float Node::get_Y(void){
-    return center.y();
 }
 
 void Node::addEdge(Edge *edge)
 {
-    Edges << edge;
+    edgeList << edge;
+    edge->adjust();
+}
 
+QList < Edge* > Node::getEdges(){
+    return edgeList;
+}
+
+QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value)
+{
+    switch (change) {
+    case ItemPositionHasChanged:
+        for (Edge *edge : qAsConst(edgeList))
+            edge->adjust();
+        break;
+    default:
+        break;
+    };
+    return QGraphicsItem::itemChange(change, value);
+}
+
+void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    update();
+    QGraphicsItem::mousePressEvent(event);
+}
+
+void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    update();
+    QGraphicsItem::mouseReleaseEvent(event);
+}
+
+
+void Node::set_X(qreal x){
+    center.setX( x );
+}
+
+void Node::set_Y(qreal y){
+    center.setY( y );
+}
+
+qreal Node::get_X(void){
+    return center.x();
+}
+qreal Node::get_Y(void){
+    return center.y();
 }
 
 void Node::setCenterPoint(QPointF point ){
@@ -67,11 +98,3 @@ void Node::setCenterPoint(QPointF point ){
 QPointF Node::getCenterPoint(){
     return this->center;
 }
-
-
-
-//QVariant Node::itemChange(GraphicsItemChange change, const QVariant &value)
-//{
-
-
-//}

@@ -15,7 +15,10 @@ namespace AM {
         QList<Node*> finalNodes;
     public:
         Machine( Node* ,QList<Node*> ,QList<Node*> );
-        virtual ~Machine();
+        virtual ~Machine(){
+            delete currentNode;
+            delete startNode;
+        };
 
         Node* getStartNode( void );
         QList<Node*>  getFinalNodes( void );

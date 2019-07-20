@@ -10,8 +10,7 @@ AM::Machine::Machine( Node* sNode ,QList<Node*> fNodes ,QList<Node*> nodes){
     this->nodes = nodes;
 }
 
-AM::Machine::~Machine(){
-}
+
 
 Node* AM::Machine::getStartNode( void ){
     return startNode;

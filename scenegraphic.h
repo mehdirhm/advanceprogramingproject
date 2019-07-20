@@ -10,18 +10,14 @@
 #include <math.h>
 #include "node.hpp"
 #include "edge.hpp"
-#include <QLineEdit>
+#include<QLineEdit>
 
 class scenegraphic:public QGraphicsView
 {
     Q_OBJECT
 
 public:
-
-    void ManageInput();
-    QPainter* GetPaint(QPainter *p );
     scenegraphic(QWidget *parent = 0);
-    virtual ~scenegraphic();
     QGraphicsScene* getScene();
 
     static void setNodeButtonActive();
@@ -32,12 +28,19 @@ public:
     static void setEdgeButtonDeactive();
     static bool isEdgeButtonActived();
 
-    static bool GetDragAndDrop();
+    static void setInitialButtonActive();
+    static void setInitialButtonDeactive();
+    static bool isInitialButtonActived();
 
-    static void setDragAndDropDeactive();
+    static void setSelectButtonActive();
+    static void setSelectButtonDeactive();
+    static bool isSelectButtonActived();
 
-    static void DragAndDropActived();
-    Node * isInAnyCircle(QPointF);
+    static void setFinalButtonActive();
+    static void setFinalButtonDeactive();
+    static bool isFinalButtonActived();
+
+    Node* isInAnyCircle(QPointF);
     Node* isInAnyNode( QPointF);
 
 protected:
@@ -45,22 +48,20 @@ protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
 
-
 private slots:
     void customSlot();
 private:
-     QLineEdit * li;
     static bool edgeButtonActived;
     static bool nodeButtonActived;
-    static bool dragAndDrop;
-    bool isDrag=false;
+    static bool selectButtonActived;
+    static bool finalButtonActived;
+    static bool initialButtonActived;
+    QLineEdit *li;
+    QGraphicsLineItem* tempLine;
     QGraphicsScene* scene;
-    QPointF firstPoint;
-    QPointF secondPoint;
-    QPainter pa;
+    QPainter* painter;
     Node *isPressedAnyCircle;
-   QGraphicsItem* currentDraggedItem ;
-   Node * selectedNode=nullptr;
+    Edge* ed;
 
 };
 

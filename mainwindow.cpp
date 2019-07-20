@@ -9,9 +9,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-
-
 }
 MainWindow::~MainWindow()
 {
@@ -22,19 +19,48 @@ void MainWindow::on_pushButton_clicked()
 {
     scenegraphic::setNodeButtonActive();
     scenegraphic::setEdgeButtonDeactive();
-    scenegraphic::setDragAndDropDeactive();
+    scenegraphic::setSelectButtonDeactive();
+    scenegraphic::setFinalButtonDeactive();
+    scenegraphic::setInitialButtonDeactive();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
     scenegraphic::setEdgeButtonActive();
     scenegraphic::setNodeButtonDeactive();
-    scenegraphic::setDragAndDropDeactive();
+    scenegraphic::setSelectButtonDeactive();
+//    scenegraphic::setFinalButtonDeactive();
+//    scenegraphic::setInitialButtonDeactive();
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    scenegraphic::DragAndDropActived();
+    scenegraphic::setSelectButtonActive();
+    scenegraphic::setEdgeButtonDeactive();
+    scenegraphic::setNodeButtonDeactive();
+//    scenegraphic::setFinalButtonDeactive();
+//    scenegraphic::setInitialButtonDeactive();
 }
 
+//void MainWindow::on_pushButton_4_clicked()
+//{
+//    scenegraphic::setInitialButtonActive();
+//    scenegraphic::setEdgeButtonDeactive();
+//    scenegraphic::setSelectButtonDeactive();
+//    scenegraphic::setFinalButtonDeactive();
+//    scenegraphic::setNodeButtonDeactive();
+//}
 
+//void MainWindow::on_pushButton_5_clicked()
+//{
+//    scenegraphic::setFinalButtonActive();
+//    scenegraphic::setEdgeButtonDeactive();
+//    scenegraphic::setSelectButtonDeactive();
+//    scenegraphic::setFinalButtonDeactive();
+//    scenegraphic::setNodeButtonDeactive();
+//}
+
+//void MainWindow::on_pushButton_6_clicked()
+//{
+
+//}

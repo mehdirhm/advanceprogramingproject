@@ -2,25 +2,34 @@
 #define EDGE_H
 
 #include"node.hpp"
-#include<map>
 #include<QList>
+#include <QGraphicsItem>
+#include<QGraphicsView>
 
-class Edge:public QGraphicsLineItem
+class Edge:public QGraphicsItem
 {
-
-
-
 private:
     Node* sourceNode;
     Node* destNode;
-    QList  <QString *> inputs;
+    QPointF sourcePoint;
+    QPointF destPoint;
+    qreal arrowSize;
+   QString str;
+    QList <QString>inputs;
 
+protected:
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 public:
     Edge( Node* ,Node* );
-    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
-    void addInput(QString *);
 
-
+    Node* getSourceNode() const;
+    Node* getDestNode() const;
+    void setSourceNode( Node* );
+    void setDestNode( Node* );
+    void addInput(QString );
+   void addText( QString);
+    void adjust();
 };
 
 
