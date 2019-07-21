@@ -1,6 +1,7 @@
 #include "scenegraphic.h"
 #include"node.hpp"
 #include<iostream>
+#include <machine.hpp>
 
 bool scenegraphic::edgeButtonActived    = false;
 bool scenegraphic::nodeButtonActived    = false;
@@ -10,7 +11,10 @@ bool scenegraphic::finalButtonActived   = false;
 
 
 scenegraphic::scenegraphic(QWidget* parent):QGraphicsView (parent)
-  , isPressedAnyCircle(nullptr),tempLine( nullptr ) {
+  , isPressedAnyCircle(nullptr),tempLine( nullptr ), machine(new AM::Machine(startNode,nodes)) {
+
+
+
     QGraphicsScene *scene = new QGraphicsScene(this);
     scene->setItemIndexMethod(QGraphicsScene::NoIndex);
     scene->setSceneRect(-400, -400, 800, 800);
@@ -61,7 +65,7 @@ Node* scenegraphic::isInAnyNode(QPointF point ){
 }
 
 void scenegraphic::mousePressEvent(QMouseEvent *event){
-    std::cout<<"slm"<<std::endl;
+
 
     QPointF scenePt = mapToScene(event->pos());
 
@@ -71,10 +75,12 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
         if(event->buttons() & Qt::LeftButton){
             Node *node=new Node( scenePt.x() ,scenePt.y() );
 
- std::cout<<Node::getCounter()<<std::endl;
+
 
             if ( !isInAnyNode( node->getCenterPoint() ) ){
             scene->addItem( node );
+            machine->addNode(node);
+            nodes<<node;
             Node::AddCounter();
 
 
@@ -100,6 +106,29 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
 
     scene->update();
+
+    if(scenegraphic::isInitialButtonActived()){
+        if ( Node* node = isInAnyCircle( scenePt ) ){
+            startNode = node;
+            machine->setStartNode(startNode);
+            startNode->setIsStart();
+            startNode->setSelected(true);
+//            const QList<QGraphicsItem *> items = scene->items();
+//            for (QGraphicsItem *item : items){
+//                if(item->isSelected()){
+//                    item->setFlag(QGraphicsItem::ItemIsSelectable,true);
+//                }
+//            }
+
+
+            std::cout<<startNode->getIsStart()<<std::endl;
+        }
+
+    }
+
+    if(scenegraphic::isInitialButtonActived()){
+
+    }
 }
 
 void scenegraphic::mouseReleaseEvent(QMouseEvent *event){
@@ -111,6 +140,9 @@ void scenegraphic::mouseReleaseEvent(QMouseEvent *event){
                ed = new Edge( sourceNode ,destNode );
               ed->adjust();
               scene->addItem( ed );
+
+              sourceNode->addEdge(ed);
+
 
               li=new QLineEdit;
                            scene->addWidget(li);
@@ -129,11 +161,13 @@ void scenegraphic::mouseReleaseEvent(QMouseEvent *event){
     }
 
     if ( scenegraphic::isSelectButtonActived() ){
+        if ( isPressedAnyCircle ){
        isPressedAnyCircle->setCenterPoint( scenePt );
        QList <Edge*> edgelist = isPressedAnyCircle->getEdges();
        for ( Edge* edge : qAsConst(edgelist) ){
            edge->adjust();
        }
+        }
        isPressedAnyCircle = nullptr;
     }
 
@@ -230,6 +264,7 @@ void scenegraphic::setInitialButtonDeactive(){
 bool scenegraphic::isInitialButtonActived(){
     return scenegraphic::initialButtonActived;
 }
+
 
 
 

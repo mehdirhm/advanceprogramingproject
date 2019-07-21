@@ -3,12 +3,14 @@
 #include"machine.hpp"
 #include"dfa.hpp"
 #include<QMouseEvent>
+#include<QLineEdit>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
 }
 MainWindow::~MainWindow()
 {
@@ -65,3 +67,29 @@ void MainWindow::on_pushButton_3_clicked()
 //{
 
 //}
+void MainWindow::handleInput(){
+
+
+
+
+}
+
+void MainWindow::on_actionGet_Input_triggered()
+{
+    li=new QLineEdit;
+    li->setVisible(true);
+    connect(li,SIGNAL(returnPressed()),this,SLOT(handleInput()));
+
+
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    scenegraphic::setEdgeButtonDeactive();
+    scenegraphic::setNodeButtonDeactive();
+    scenegraphic::setFinalButtonDeactive();
+    scenegraphic::setSelectButtonDeactive();
+    scenegraphic::setInitialButtonActive();
+
+
+}

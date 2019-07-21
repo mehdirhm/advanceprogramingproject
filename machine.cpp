@@ -3,27 +3,36 @@
 #include <vector>
 #include <QList>
 
-AM::Machine::Machine( Node* sNode ,QList<Node*> fNodes ,QList<Node*> nodes){
+AM::Machine::Machine( Node* sNode ,QList<Node*> Nodes ){
     startNode = sNode;
     setCurrentNode( sNode );
-    this->finalNodes = fNodes;
+
     this->nodes = nodes;
 }
 
 
 
-Node* AM::Machine::getStartNode( void ){
-    return startNode;
+void AM::Machine::setStartNode( Node * node ){
+    startNode=node;
 }
 
-QList<Node*> AM::Machine::getFinalNodes( void ){
-    return nodes;
-}
+
 
 void AM::Machine::setCurrentNode( Node* node){
     currentNode = node;
 }
 
+
+void AM::Machine::setFinalNode(Node * node){
+    final=node;
+}
+
+void AM::Machine:: addNode(Node * node){
+    nodes<<node;
+
+
+
+}
 
 
 

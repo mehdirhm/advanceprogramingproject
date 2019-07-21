@@ -15,11 +15,37 @@ class scenegraphic;
 class Node: public QGraphicsItem
 {
 private:
+    bool isStart=false;
+    bool isFinal=false;
+
     QList<Edge * > edgeList;
     QPointF center;
 static int counter;
 
 public:
+
+void setIsStart(){
+
+    isStart=true;
+
+
+
+}
+void setIsFinal(){
+
+    isFinal=true;
+
+}
+
+bool getIsFinal(){
+
+    return isFinal;
+}
+
+bool getIsStart(){
+
+    return isStart;
+}
 
     Node( qreal ,qreal );
 

@@ -19,13 +19,29 @@ Edge::Edge( Node* sourceNode ,Node* destNode ):QGraphicsItem ( nullptr ),arrowSi
 
 void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    if (!sourceNode || !destNode )
-        return;
+
+
+
+
+
+if ( sourceNode == destNode ){
+    QPointF edgeCenter = sourcePoint - QPointF( 0 ,RAD/2 );
+    painter->drawEllipse( edgeCenter ,RAD/2 ,RAD/2 );
+    QPointF d(0,+25);
+    painter->drawText(edgeCenter-d,str);
+    QPointF arrowPoint = edgeCenter + QPointF( RAD/2*cos( M_PI/6 ) ,RAD/2*sin( M_PI/6));
+    painter->setPen( QPen(Qt::blue));
+
+    QPointF firstArrow = edgeCenter + QPointF( (RAD/2 - 5) *cos(M_PI/18) ,(RAD/2 - 5) *sin(M_PI/18) );
+    QPointF secondArrow = edgeCenter + QPointF( (RAD/2 +5) *cos(M_PI/18) ,(RAD/2 + 5) *sin(M_PI/18) );
+    painter->setBrush( QBrush(Qt::red));
+    painter->drawPolygon( QPolygonF() << firstArrow << secondArrow << arrowPoint );
+    return;
+}
+
 
     QLineF line(sourcePoint, destPoint);
-    if (qFuzzyCompare(line.length(), qreal(0.))){
-        //edge to itself
-    }
+
 QLineF lin(sourceNode->getCenterPoint(),destNode->getCenterPoint());
 update();
 
@@ -54,31 +70,35 @@ painter->drawText(lin.center(),str);
     QPointF destArrowP2 = destPoint + QPointF(sin(angle - M_PI + M_PI / 3 ) * arrowSize,
                                               cos(angle - M_PI + M_PI / 3) * arrowSize);
 
+    painter->drawRect( boundingRect() );
     painter->setBrush(Qt::red);
-
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
 
 }
 
 QRectF Edge::boundingRect() const
 {
-    if (!sourceNode || !destNode)
-        return QRectF();
-
-//    qreal penWidth = 1;
-//    qreal extra = (penWidth + arrowSize) / 2.0;
+    qreal penWidth = 1;
+    qreal extra = (penWidth + arrowSize) / 2.0;
+    if ( sourceNode == destNode ){
+        return QRectF( sourcePoint.x() - RAD/2 ,sourcePoint.y() - RAD ,RAD ,RAD )
+               .adjusted( -extra, -extra, extra, extra);
+    }
 
   /*!important*/  return QRectF(sourcePoint, QSizeF(destPoint.x() - sourcePoint.x(),
                                       destPoint.y() - sourcePoint.y()))
-        .normalized();
-//        .adjusted(-extra, -extra, extra, extra);
+        .normalized()
+      .adjusted(-extra, -extra, extra, extra);
 
 }
 
 void Edge::adjust()
 {
-    if (!sourceNode || !destNode)
+    //adjust to sourcePoint and destPoint
+    if ( sourceNode == destNode ){
+        sourcePoint = destPoint = sourceNode->getCenterPoint();
         return;
+    }
 
     QLineF line( sourceNode->getCenterPoint() ,destNode->getCenterPoint() );
     qreal length = line.length();
@@ -86,10 +106,11 @@ void Edge::adjust()
     prepareGeometryChange();
 
         QPointF edgeOffset((line.dx() * 10) / length, (line.dy() * 10) / length);
-        sourcePoint = line.p1() + edgeOffset;
-        destPoint = line.p2() - edgeOffset;
+        sourcePoint = line.p1() + 2*edgeOffset;
+        destPoint   = line.p2() - 2*edgeOffset;
         update();
 }
+
 
 
 Node* Edge::getSourceNode() const

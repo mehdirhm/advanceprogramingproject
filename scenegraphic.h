@@ -11,6 +11,7 @@
 #include "node.hpp"
 #include "edge.hpp"
 #include<QLineEdit>
+#include"machine.hpp"
 
 class scenegraphic:public QGraphicsView
 {
@@ -48,8 +49,10 @@ public:
     static void setFinalButtonDeactive();
     static bool isFinalButtonActived();
 
+
     Node* isInAnyCircle(QPointF);
     Node* isInAnyNode( QPointF);
+  QList <Node *> nodes;
 
 protected:
     void mouseReleaseEvent(QMouseEvent * event);
@@ -64,12 +67,15 @@ private:
     static bool selectButtonActived;
     static bool finalButtonActived;
     static bool initialButtonActived;
+    static bool SelectStartNode;
     QLineEdit *li;
     QGraphicsLineItem* tempLine;
     QGraphicsScene* scene;
     QPainter* painter;
     Node *isPressedAnyCircle;
     Edge* ed;
+    Node *startNode;
+    AM::Machine *machine;
 
 };
 

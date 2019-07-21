@@ -5,6 +5,7 @@
 #include<QGraphicsScene>
 #include<QPainter>
 #include<QPaintEvent>
+#include<QLineEdit>
 namespace Ui {
 class MainWindow;
 }
@@ -18,6 +19,7 @@ public:
 
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void handleInput();
 
 private slots:
     void on_pushButton_clicked();
@@ -30,9 +32,14 @@ private slots:
 
 //    void on_pushButton_6_clicked();
 
+    void on_actionGet_Input_triggered();
+
+    void on_pushButton_6_clicked();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene * scene;
+    QLineEdit *li;
 };
 
 #endif // MAINWINDOW_H

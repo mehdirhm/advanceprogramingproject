@@ -17,6 +17,7 @@ private:
    QString str;
     QList <QString>inputs;
 
+
 protected:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;

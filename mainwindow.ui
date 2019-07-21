@@ -76,6 +76,32 @@
      <string>Remove Item</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>20</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Select Start Node</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>20</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Select Final Node</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -99,6 +125,7 @@
     <property name="title">
      <string>Input</string>
     </property>
+    <addaction name="separator"/>
     <addaction name="actionGet_Input"/>
     <addaction name="actionStep_by_Step_Machine"/>
    </widget>

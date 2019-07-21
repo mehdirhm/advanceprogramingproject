@@ -12,19 +12,21 @@ namespace AM {
         QList<Node*> nodes;
         Node* currentNode;
         Node* startNode;
-        QList<Node*> finalNodes;
+        Node* final;
     public:
-        Machine( Node* ,QList<Node*> ,QList<Node*> );
+        Machine( Node* ,QList<Node*>  );
         virtual ~Machine(){
             delete currentNode;
             delete startNode;
         };
 
-        Node* getStartNode( void );
-        QList<Node*>  getFinalNodes( void );
-        void  setCurrentNode( Node* );
+        void setStartNode( Node * );
 
-        const QList<Node *> getNodes( void );
+        void  setCurrentNode( Node* );
+       void setFinalNode(Node *);
+
+
+        void addNode(Node *);
     };
 }
 
