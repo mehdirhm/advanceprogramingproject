@@ -29,6 +29,7 @@ SOURCES += \
         edge.cpp \
         machine.cpp \
         main.cpp \
+        mainwin.cpp \
         mainwindow.cpp \
         node.cpp \
         scenegraphic.cpp \
@@ -38,12 +39,14 @@ HEADERS += \
         dfa.hpp \
         edge.hpp \
         machine.hpp \
+        mainwin.h \
         mainwindow.h \
         node.hpp \
         scenegraphic.h \
         turing.hpp
 
 FORMS += \
+        mainwin.ui \
         mainwindow.ui
 
 # Default rules for deployment.

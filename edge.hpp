@@ -22,6 +22,11 @@ protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 public:
     Edge( Node* ,Node* );
+    ~Edge(){
+        delete sourceNode;
+        delete destNode;
+
+    }
 
     Node* getSourceNode() const;
     Node* getDestNode() const;

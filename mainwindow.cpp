@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete  scene;
 }
 
 void MainWindow::on_pushButton_clicked()

@@ -37,6 +37,14 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->setBrush(QBrush(Qt::green, Qt::SolidPattern));
     painter->drawEllipse( boundingRect() );
     painter->setBrush(QBrush() );
+    QPointF p (-5,5);
+
+    QString s="s"+QString::number(Node::getCounter());
+
+std::cout<<Node::getCounter()<<std::endl;
+    painter->drawText(getCenterPoint()+p,s);
+
+
 
 }
 
@@ -98,3 +106,17 @@ void Node::setCenterPoint(QPointF point ){
 QPointF Node::getCenterPoint(){
     return this->center;
 }
+ int Node::counter=0;
+
+void Node::AddCounter(){
+
+    counter++;
+}
+
+int Node::getCounter(){
+    return counter;
+}
+
+
+
+

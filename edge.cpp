@@ -55,8 +55,7 @@ painter->drawText(lin.center(),str);
                                               cos(angle - M_PI + M_PI / 3) * arrowSize);
 
     painter->setBrush(Qt::red);
-    painter->drawLine(sourceArrowP1 , line.p1() );
-    painter->drawLine(sourceArrowP2 , line.p1() );
+
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
 
 }

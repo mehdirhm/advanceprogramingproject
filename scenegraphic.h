@@ -18,6 +18,14 @@ class scenegraphic:public QGraphicsView
 
 public:
     scenegraphic(QWidget *parent = 0);
+    ~scenegraphic(){
+        delete li;
+        delete tempLine;
+        delete scene;
+        delete painter;
+        delete isPressedAnyCircle;
+        delete ed;
+    }
     QGraphicsScene* getScene();
 
     static void setNodeButtonActive();

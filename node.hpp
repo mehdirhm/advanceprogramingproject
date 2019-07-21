@@ -17,9 +17,12 @@ class Node: public QGraphicsItem
 private:
     QList<Edge * > edgeList;
     QPointF center;
+static int counter;
 
 public:
+
     Node( qreal ,qreal );
+
 
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
@@ -30,8 +33,9 @@ public:
     qreal  get_Y(void);
     void setCenterPoint( QPointF );
     QPointF getCenterPoint( void );
+ static void AddCounter();
 
-
+ static  int getCounter();
     void addEdge(Edge *edge);
 
     QList< Edge* > getEdges();

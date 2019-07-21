@@ -22,6 +22,7 @@ scenegraphic::scenegraphic(QWidget* parent):QGraphicsView (parent)
     scale(qreal(1), qreal(1));
     setMinimumSize(400, 400);
 
+
 }
 
 Node * scenegraphic::isInAnyCircle(QPointF point){
@@ -60,16 +61,28 @@ Node* scenegraphic::isInAnyNode(QPointF point ){
 }
 
 void scenegraphic::mousePressEvent(QMouseEvent *event){
+    std::cout<<"slm"<<std::endl;
 
     QPointF scenePt = mapToScene(event->pos());
 
     if ( scenegraphic::isNodeButtonActived()  ){
+
         QPointF scenePt = mapToScene(event->pos());
         if(event->buttons() & Qt::LeftButton){
             Node *node=new Node( scenePt.x() ,scenePt.y() );
 
+ std::cout<<Node::getCounter()<<std::endl;
+
             if ( !isInAnyNode( node->getCenterPoint() ) ){
             scene->addItem( node );
+            Node::AddCounter();
+
+
+
+            scene->update();
+//            std::cout<<node->getCounter()<<std::endl;
+
+
             }
         }
     }
@@ -98,6 +111,7 @@ void scenegraphic::mouseReleaseEvent(QMouseEvent *event){
                ed = new Edge( sourceNode ,destNode );
               ed->adjust();
               scene->addItem( ed );
+
               li=new QLineEdit;
                            scene->addWidget(li);
                            li->resize(120,20);
