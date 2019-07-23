@@ -9,6 +9,7 @@
 #include<QGraphicsView>
 #include <QGraphicsItem>
 
+
 class Edge;
 class scenegraphic;
 
@@ -17,12 +18,21 @@ class Node: public QGraphicsItem
 private:
     bool isStart=false;
     bool isFinal=false;
+    QString s;
+
 
     QList<Edge * > edgeList;
     QPointF center;
 static int counter;
 
 public:
+int getLenth(){
+    return edgeList.length();
+}
+
+QString getNameNode(){
+    return s;
+}
 
 void setIsStart(){
 
@@ -48,6 +58,9 @@ bool getIsStart(){
 }
 
     Node( qreal ,qreal );
+    ~Node(){
+        edgeList.clear();
+    }
 
 
     QRectF boundingRect() const override;

@@ -25,9 +25,15 @@ public:
         delete li;
         delete tempLine;
         delete scene;
-        delete painter;
+
         delete isPressedAnyCircle;
         delete ed;
+        delete dfa;
+        delete finalNode;
+        delete startNode;
+        delete line;
+
+        nodes.clear();
     }
     QGraphicsScene* getScene();
 
@@ -56,6 +62,13 @@ public:
     static bool isGetinput();
 
 
+    static void setCalActive();
+    static void setCalDeactive();
+    static bool IsCal();
+
+
+
+
     Node* isInAnyCircle(QPointF);
     Node* isInAnyNode( QPointF);
   QList <Node *> nodes;
@@ -68,6 +81,11 @@ protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
 
+       void zoomIn();
+       void zoomOut();
+       void wheelEvent(QWheelEvent *event) override;
+       void MeasureViewScene(qreal scaleMeasure);
+
 private slots:
     void customSlot();
 //    void handleInput();
@@ -79,17 +97,20 @@ private:
     static bool initialButtonActived;
     static bool SelectStartNode;
     static bool Getinput;
-    QLineEdit *li;
-    QLineEdit *line;
-    QGraphicsLineItem* tempLine;
-    QGraphicsScene* scene;
-    QPainter* painter;
-    Node *isPressedAnyCircle;
-    Edge* ed;
-    Node *startNode;
-    Node *finalNode;
+
+    static bool calculate;
+    QLineEdit *li=nullptr;
+    QLineEdit *line=nullptr;
+    QGraphicsLineItem* tempLine=nullptr;
+    QGraphicsScene* scene=nullptr;
+//    QPainter* painter=nullptr;
+    Node *isPressedAnyCircle=nullptr;
+    Edge* ed=nullptr;
+    Node *startNode=nullptr;
+    Node *finalNode=nullptr;
     bool DfaMachine=true;
-    DFA *dfa;
+    DFA *dfa=nullptr;
+
 //    DFA *dfa;
 
 

@@ -21,6 +21,9 @@ namespace AM {
         virtual ~Machine(){
             delete currentNode;
             delete startNode;
+            delete final;
+            nodes.clear();
+
         };
 
         void setStartNode( Node * );

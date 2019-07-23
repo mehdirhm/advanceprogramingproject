@@ -39,9 +39,9 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->setBrush(QBrush() );
     QPointF p (-5,5);
 
-    QString s="s"+QString::number(Node::getCounter());
+     s="s"+QString::number(Node::getCounter());
 
-std::cout<<Node::getCounter()<<std::endl;
+//std::cout<<Node::getCounter()<<std::endl;
     painter->drawText(getCenterPoint()+p,s);
 
 
@@ -50,7 +50,17 @@ std::cout<<Node::getCounter()<<std::endl;
 
 void Node::addEdge(Edge *edge)
 {
+
+
     edgeList << edge;
+
+//    i++;
+//    std::cout<<i<<std::endl;
+
+
+
+
+
     edge->adjust();
 }
 

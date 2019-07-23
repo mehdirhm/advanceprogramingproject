@@ -2,12 +2,14 @@
 #include"node.hpp"
 #include<iostream>
 #include <machine.hpp>
+#include<QScopedPointer>
 
 bool scenegraphic::edgeButtonActived    = false;
 bool scenegraphic::nodeButtonActived    = false;
 bool scenegraphic::selectButtonActived  = false;
 bool scenegraphic::initialButtonActived = false;
 bool scenegraphic::finalButtonActived   = false;
+bool scenegraphic::calculate=false;
 
 
 scenegraphic::scenegraphic(QWidget* parent):QGraphicsView (parent)
@@ -73,7 +75,8 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
         QPointF scenePt = mapToScene(event->pos());
         if(event->buttons() & Qt::LeftButton){
-            Node *node=new Node( scenePt.x() ,scenePt.y() );
+         Node * node=new Node( scenePt.x() ,scenePt.y() );
+
 
 
 
@@ -82,6 +85,8 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
             if(GetIsDfa()){
                 dfa=new DFA;
                 dfa->addNode(node);
+
+
 
 
 
@@ -98,7 +103,10 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
 
             }
+
         }
+
+
     }
     if ( scenegraphic::isEdgeButtonActived()  ){
         if ( Node* node = isInAnyCircle( scenePt ) ){
@@ -133,7 +141,7 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 //            }
 
 
-            std::cout<<startNode->getIsStart()<<std::endl;
+
         }
 
     }
@@ -164,9 +172,16 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
     if(isGetinput()){
         line=new QLineEdit;
-        li->setVisible(true);
+        line->setVisible(true);
 
         connect(line,SIGNAL(returnPressed()),this,SLOT(handleInput()));
+
+    }
+
+
+    if(IsCal()){
+
+        dfa->checkInput("11101");
     }
 }
 
@@ -176,12 +191,10 @@ void scenegraphic::mouseReleaseEvent(QMouseEvent *event){
     if ( scenegraphic::isEdgeButtonActived() ){
       if ( Node* sourceNode = isPressedAnyCircle ){
           if ( Node * destNode = isInAnyCircle( scenePt ) ){
-               ed = new Edge( sourceNode ,destNode );
-              ed->adjust();
+              ed = new Edge( sourceNode ,destNode );
+               ed->adjust();
               scene->addItem( ed );
-
-              sourceNode->addEdge(ed);
-
+//                sourceNode->addEdge(ed);
 
               li=new QLineEdit;
                            scene->addWidget(li);
@@ -190,6 +203,9 @@ void scenegraphic::mouseReleaseEvent(QMouseEvent *event){
                            li->move(line.center());
                            li->setFocus();
                       connect(li,SIGNAL(returnPressed()),this,SLOT(customSlot()));
+
+
+
           }
           //Line which draw onTime
           scene->removeItem( tempLine );
@@ -237,6 +253,34 @@ void scenegraphic::mouseMoveEvent(QMouseEvent *event){
 
 }
 
+
+
+
+
+void scenegraphic::wheelEvent(QWheelEvent *event)
+{
+    MeasureViewScene(pow((double)2, -event->delta() / 220.0));
+}
+
+
+void scenegraphic::MeasureViewScene(qreal scaleMeasure)
+{
+    qreal measure = transform().scale(scaleMeasure, scaleMeasure).mapRect(QRectF(0, 0, 1, 1)).width();
+    if (measure < 0.09 || measure > 100)
+        return;
+
+    scale(scaleMeasure, scaleMeasure);
+}
+
+void scenegraphic::zoomIn()
+{
+    MeasureViewScene(qreal(1.4));
+}
+
+void scenegraphic::zoomOut()
+{
+    MeasureViewScene(1 / qreal(1.4));
+}
 
 QGraphicsScene* scenegraphic::getScene() {
     return  scene;
@@ -318,6 +362,17 @@ void scenegraphic::setGetInputDeactive(){
     scenegraphic::Getinput=false;
 }
 
+void scenegraphic::setCalActive(){
+    scenegraphic::calculate=true;
+
+}
+void scenegraphic::setCalDeactive(){
+    scenegraphic::calculate=false;
+}
+
+bool scenegraphic::IsCal(){
+    return scenegraphic::calculate;
+}
 void scenegraphic::customSlot()
 {
  QString  st=li->text();
@@ -327,20 +382,13 @@ void scenegraphic::customSlot()
  QByteArray ba = st.toLocal8Bit();
   const char *c_str2 = ba.data();
 
-   std::cout<<utf8_text<<std::endl;
-    li->setVisible(false);
-//    label=new QLabel;
-//    scene->addWidget(label);
-//    label->resize(100,20);
-//    label->move((firstPoint.x()+secondPoint.x())/2,(firstPoint.y()+secondPoint.y())/2);
-//    scene->update();
-//    QPixmap pm;
 
-//    QTransform trans;
-//    trans.rotate(45);
-//    label->setPixmap(pm.transformed(trans));
-//    label->show();
+    li->setVisible(false);
+
 ed->addText(st);
+
+
+
 scene->update();
 
 

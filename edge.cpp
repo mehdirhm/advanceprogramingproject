@@ -8,8 +8,8 @@ Edge::Edge( Node* sourceNode ,Node* destNode ):QGraphicsItem ( nullptr ),arrowSi
     this->destNode = destNode;
     sourcePoint = sourceNode->getCenterPoint();
     destPoint = destNode->getCenterPoint();
-    sourceNode->addEdge( this );
-    destNode->addEdge( this );
+   sourceNode->addEdge( this );
+//    destNode->addEdge( this );
 //    setFlag(ItemIsMovable);
 //    setFlag(ItemSendsGeometryChanges);
 //    setCacheMode(DeviceCoordinateCache);
@@ -70,7 +70,7 @@ painter->drawText(lin.center(),edgeValue);
     QPointF destArrowP2 = destPoint + QPointF(sin(angle - M_PI + M_PI / 3 ) * arrowSize,
                                               cos(angle - M_PI + M_PI / 3) * arrowSize);
 
-    painter->drawRect( boundingRect() );
+//    painter->drawRect( boundingRect() );
     painter->setBrush(Qt::red);
     painter->drawPolygon(QPolygonF() << line.p2() << destArrowP1 << destArrowP2);
 
@@ -131,7 +131,10 @@ void Edge::setDestNode( Node* node ) {
     destNode = node;
 }
 void Edge:: addText( QString s){
+
+
     edgeValue=s;
+
 
 
 };

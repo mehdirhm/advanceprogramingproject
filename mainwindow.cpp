@@ -16,6 +16,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete  scene;
+    delete li;
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -32,8 +33,9 @@ void MainWindow::on_pushButton_2_clicked()
     scenegraphic::setEdgeButtonActive();
     scenegraphic::setNodeButtonDeactive();
     scenegraphic::setSelectButtonDeactive();
-//    scenegraphic::setFinalButtonDeactive();
-//    scenegraphic::setInitialButtonDeactive();
+     scenegraphic::setCalDeactive();
+    scenegraphic::setFinalButtonDeactive();
+    scenegraphic::setInitialButtonDeactive();
 }
 
 void MainWindow::on_pushButton_3_clicked()
@@ -41,8 +43,9 @@ void MainWindow::on_pushButton_3_clicked()
     scenegraphic::setSelectButtonActive();
     scenegraphic::setEdgeButtonDeactive();
     scenegraphic::setNodeButtonDeactive();
-//    scenegraphic::setFinalButtonDeactive();
-//    scenegraphic::setInitialButtonDeactive();
+     scenegraphic::setCalDeactive();
+    scenegraphic::setFinalButtonDeactive();
+    scenegraphic::setInitialButtonDeactive();
 }
 
 //void MainWindow::on_pushButton_4_clicked()
@@ -86,11 +89,12 @@ void MainWindow::on_actionGet_Input_triggered()
     scenegraphic::setInitialButtonDeactive();
     scenegraphic::setFinalButtonDeactive();
     scenegraphic::setGetInputActive();
+     scenegraphic::setCalDeactive();
 
 
 
 }
-
+// select start Node
 void MainWindow::on_pushButton_6_clicked()
 {
     scenegraphic::setEdgeButtonDeactive();
@@ -98,6 +102,39 @@ void MainWindow::on_pushButton_6_clicked()
     scenegraphic::setFinalButtonDeactive();
     scenegraphic::setSelectButtonDeactive();
     scenegraphic::setInitialButtonActive();
+    scenegraphic::setCalDeactive();
+
+
+}
+
+//cal button
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    scenegraphic::setEdgeButtonDeactive();
+    scenegraphic::setNodeButtonDeactive();
+    scenegraphic::setFinalButtonDeactive();
+    scenegraphic::setSelectButtonDeactive();
+    scenegraphic::setInitialButtonDeactive();
+    scenegraphic::setCalActive();
+
+
+
+}
+
+//select final node
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    scenegraphic::setEdgeButtonDeactive();
+    scenegraphic::setNodeButtonDeactive();
+    scenegraphic::setFinalButtonDeactive();
+    scenegraphic::setSelectButtonDeactive();
+    scenegraphic::setInitialButtonDeactive();
+    scenegraphic::setCalDeactive();
+    scenegraphic::setFinalButtonActive();
+
+
 
 
 }
