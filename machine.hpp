@@ -8,12 +8,15 @@
 namespace AM {
     class Machine
     {
-    private:
+        protected:
         QList<Node*> nodes;
         Node* currentNode;
         Node* startNode;
         Node* final;
     public:
+
+        Machine();
+
         Machine( Node* ,QList<Node*>  );
         virtual ~Machine(){
             delete currentNode;
@@ -24,6 +27,7 @@ namespace AM {
 
         void  setCurrentNode( Node* );
        void setFinalNode(Node *);
+
 
 
         void addNode(Node *);

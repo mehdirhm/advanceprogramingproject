@@ -40,6 +40,7 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene * scene;
     QLineEdit *li;
+    QString input;
 };
 
 #endif // MAINWINDOW_H

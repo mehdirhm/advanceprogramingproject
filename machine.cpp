@@ -9,6 +9,9 @@ AM::Machine::Machine( Node* sNode ,QList<Node*> Nodes ){
 
     this->nodes = nodes;
 }
+AM::Machine::Machine(){
+
+}
 
 
 

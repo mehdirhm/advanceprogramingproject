@@ -5,6 +5,7 @@
 #include<QList>
 #include <QGraphicsItem>
 #include<QGraphicsView>
+#include<QString>
 
 class Edge:public QGraphicsItem
 {
@@ -14,8 +15,7 @@ private:
     QPointF sourcePoint;
     QPointF destPoint;
     qreal arrowSize;
-   QString str;
-    QList <QString>inputs;
+    QString edgeValue;
 
 
 protected:
@@ -33,9 +33,9 @@ public:
     Node* getDestNode() const;
     void setSourceNode( Node* );
     void setDestNode( Node* );
-    void addInput(QString );
-   void addText( QString);
+    void addText( QString);
     void adjust();
+    QString GetEdgeValue();
 };
 
 

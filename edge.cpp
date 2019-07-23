@@ -3,7 +3,7 @@
 #include <math.h>
 #include <iostream>
 #include <QTextItem>
-Edge::Edge( Node* sourceNode ,Node* destNode ):QGraphicsItem ( nullptr ),arrowSize(20){
+Edge::Edge( Node* sourceNode ,Node* destNode ):QGraphicsItem ( nullptr ),arrowSize(10){
     this->sourceNode = sourceNode;
     this->destNode = destNode;
     sourcePoint = sourceNode->getCenterPoint();
@@ -28,7 +28,7 @@ if ( sourceNode == destNode ){
     QPointF edgeCenter = sourcePoint - QPointF( 0 ,RAD/2 );
     painter->drawEllipse( edgeCenter ,RAD/2 ,RAD/2 );
     QPointF d(0,+25);
-    painter->drawText(edgeCenter-d,str);
+    painter->drawText(edgeCenter-d,edgeValue);
     QPointF arrowPoint = edgeCenter + QPointF( RAD/2*cos( M_PI/6 ) ,RAD/2*sin( M_PI/6));
     painter->setPen( QPen(Qt::blue));
 
@@ -54,7 +54,7 @@ update();
 
 
 
-painter->drawText(lin.center(),str);
+painter->drawText(lin.center(),edgeValue);
 
  update();
 
@@ -131,14 +131,15 @@ void Edge::setDestNode( Node* node ) {
     destNode = node;
 }
 void Edge:: addText( QString s){
-    str=s;
+    edgeValue=s;
 
 
 };
 
-void Edge::addInput(QString  s){
-inputs<<s;
-////
-////
+
+QString Edge::GetEdgeValue(){
+    return edgeValue;
 }
+
+
 

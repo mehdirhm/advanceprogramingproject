@@ -11,7 +11,7 @@ bool scenegraphic::finalButtonActived   = false;
 
 
 scenegraphic::scenegraphic(QWidget* parent):QGraphicsView (parent)
-  , isPressedAnyCircle(nullptr),tempLine( nullptr ), machine(new AM::Machine(startNode,nodes)) {
+  , isPressedAnyCircle(nullptr),tempLine( nullptr ) {
 
 
 
@@ -79,7 +79,15 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
             if ( !isInAnyNode( node->getCenterPoint() ) ){
             scene->addItem( node );
-            machine->addNode(node);
+            if(GetIsDfa()){
+                dfa=new DFA;
+                dfa->addNode(node);
+
+
+
+            }
+//            machine->addNode(node);
+//            dfa->addNode(startNode);
             nodes<<node;
             Node::AddCounter();
 
@@ -110,8 +118,12 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
     if(scenegraphic::isInitialButtonActived()){
         if ( Node* node = isInAnyCircle( scenePt ) ){
             startNode = node;
-            machine->setStartNode(startNode);
+//            machine->setStartNode(startNode);
             startNode->setIsStart();
+            if(GetIsDfa()){
+                 dfa->setStartNode(startNode);
+            }
+
             startNode->setSelected(true);
 //            const QList<QGraphicsItem *> items = scene->items();
 //            for (QGraphicsItem *item : items){
@@ -126,8 +138,35 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
     }
 
-    if(scenegraphic::isInitialButtonActived()){
 
+    if(scenegraphic::finalButtonActived){
+        if ( Node* node = isInAnyCircle( scenePt ) ){
+            finalNode = node;
+//            machine->setStartNode(startNode);
+            finalNode->setIsFinal();
+            if(GetIsDfa()){
+                 dfa->setFinalNode(finalNode);
+            }
+
+            finalNode->setSelected(true);
+//            const QList<QGraphicsItem *> items = scene->items();
+//            for (QGraphicsItem *item : items){
+//                if(item->isSelected()){
+//                    item->setFlag(QGraphicsItem::ItemIsSelectable,true);
+//                }
+//            }
+
+
+
+        }
+
+    }
+
+    if(isGetinput()){
+        line=new QLineEdit;
+        li->setVisible(true);
+
+        connect(line,SIGNAL(returnPressed()),this,SLOT(handleInput()));
     }
 }
 
@@ -198,6 +237,7 @@ void scenegraphic::mouseMoveEvent(QMouseEvent *event){
 
 }
 
+
 QGraphicsScene* scenegraphic::getScene() {
     return  scene;
 }
@@ -265,8 +305,18 @@ bool scenegraphic::isInitialButtonActived(){
     return scenegraphic::initialButtonActived;
 }
 
+bool scenegraphic::Getinput;
+bool scenegraphic::isGetinput(){
+    return Getinput;
+}
 
+void scenegraphic::setGetInputActive(){
+    scenegraphic::Getinput=true;
+}
 
+void scenegraphic::setGetInputDeactive(){
+    scenegraphic::Getinput=false;
+}
 
 void scenegraphic::customSlot()
 {
@@ -292,7 +342,7 @@ void scenegraphic::customSlot()
 //    label->show();
 ed->addText(st);
 scene->update();
-ed->addInput(st);
+
 
 
 //    path.addText(firstPoint.x()+100,firstPoint.y(),font,tr(c_str2));

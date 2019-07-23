@@ -72,13 +72,21 @@ void MainWindow::handleInput(){
 
 
 
+
 }
 
 void MainWindow::on_actionGet_Input_triggered()
 {
-    li=new QLineEdit;
-    li->setVisible(true);
-    connect(li,SIGNAL(returnPressed()),this,SLOT(handleInput()));
+
+
+    scenegraphic::setEdgeButtonDeactive();
+    scenegraphic::setNodeButtonDeactive();
+    scenegraphic::setFinalButtonDeactive();
+    scenegraphic::setSelectButtonDeactive();
+    scenegraphic::setInitialButtonDeactive();
+    scenegraphic::setFinalButtonDeactive();
+    scenegraphic::setGetInputActive();
+
 
 
 }

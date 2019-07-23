@@ -5,11 +5,15 @@
 #include "./machine.hpp"
 #include<QList>
 
-class DFA
+class DFA : public AM::Machine
 {
 private:
 
+
 public:
+    DFA();
+    void checkInput(QString );
+
 
 
 };

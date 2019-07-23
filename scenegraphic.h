@@ -12,6 +12,8 @@
 #include "edge.hpp"
 #include<QLineEdit>
 #include"machine.hpp"
+#include <dfa.hpp>
+
 
 class scenegraphic:public QGraphicsView
 {
@@ -49,10 +51,17 @@ public:
     static void setFinalButtonDeactive();
     static bool isFinalButtonActived();
 
+    static void setGetInputActive();
+    static void setGetInputDeactive();
+    static bool isGetinput();
+
 
     Node* isInAnyCircle(QPointF);
     Node* isInAnyNode( QPointF);
   QList <Node *> nodes;
+  bool GetIsDfa(){
+      return DfaMachine;
+  }
 
 protected:
     void mouseReleaseEvent(QMouseEvent * event);
@@ -61,6 +70,7 @@ protected:
 
 private slots:
     void customSlot();
+//    void handleInput();
 private:
     static bool edgeButtonActived;
     static bool nodeButtonActived;
@@ -68,14 +78,21 @@ private:
     static bool finalButtonActived;
     static bool initialButtonActived;
     static bool SelectStartNode;
+    static bool Getinput;
     QLineEdit *li;
+    QLineEdit *line;
     QGraphicsLineItem* tempLine;
     QGraphicsScene* scene;
     QPainter* painter;
     Node *isPressedAnyCircle;
     Edge* ed;
     Node *startNode;
-    AM::Machine *machine;
+    Node *finalNode;
+    bool DfaMachine=true;
+    DFA *dfa;
+//    DFA *dfa;
+
+
 
 };
 
