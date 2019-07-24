@@ -181,7 +181,7 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
     if(IsCal()){
 
-        dfa->checkInput("11101");
+        dfa->checkInput("01110");
     }
 }
 
@@ -377,10 +377,10 @@ void scenegraphic::customSlot()
 {
  QString  st=li->text();
 
- std::string utf8_text = st.toUtf8().constData();
- std::string const_text = st.toUtf8().constData();
- QByteArray ba = st.toLocal8Bit();
-  const char *c_str2 = ba.data();
+// std::string utf8_text = st.toUtf8().constData();
+// std::string const_text = st.toUtf8().constData();
+// QByteArray ba = st.toLocal8Bit();
+//  const char *c_str2 = ba.data();
 
 
     li->setVisible(false);
