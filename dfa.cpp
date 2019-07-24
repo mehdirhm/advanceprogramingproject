@@ -30,7 +30,7 @@ currentNode=startNode;
 //std::cout<<startNode->getNameNode().toUtf8().constData()<<std::endl;
 //std::cout<<final->getNameNode().toUtf8().constData()<<std::endl;
  std::cout<<input.toUtf8().constData()<<std::endl;
-        while(counter_for_input<5){
+        while(counter_for_input<input.length()){
     //std::cout<<final->getEdges().length()<<std::endl;
             std::cout<<currentNode->getNameNode().toUtf8().constData()<<std::endl;
             std::cout<<"i is:"<<i<<std::endl;
