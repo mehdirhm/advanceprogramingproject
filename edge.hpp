@@ -16,9 +16,13 @@ private:
     QPointF destPoint;
     qreal arrowSize;
     QString edgeValue;
+    bool isDup;
+      bool likeEdge ;
 
 
 protected:
+      QPainterPath shape() const override;
+//      enum Type { Line ,SameLine ,Ellipse ,SameEllipse };
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 public:
@@ -36,6 +40,11 @@ public:
     void addText( QString);
     void adjust();
     QString GetEdgeValue();
+    void handleCheckDupLine();
+    void setTrueDup();
+    bool GetDupBool();
+   QPointF CenterOfLine(void)const ;
+
 };
 
 
