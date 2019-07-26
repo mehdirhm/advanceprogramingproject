@@ -102,11 +102,12 @@ void Edge::adjust()
 
     QLineF line( sourceNode->getCenterPoint() ,destNode->getCenterPoint() );
     qreal length = line.length();
-
+update();
     prepareGeometryChange();
 
         QPointF edgeOffset((line.dx() * 10) / length, (line.dy() * 10) / length);
         sourcePoint = line.p1() + 2*edgeOffset;
+        update();
         destPoint   = line.p2() - 2*edgeOffset;
         update();
 }

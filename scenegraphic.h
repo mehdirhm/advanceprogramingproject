@@ -110,6 +110,7 @@ private:
     Node *finalNode=nullptr;
     bool DfaMachine=true;
     DFA *dfa=nullptr;
+        QList < Edge* > edgeListView;
 
 //    DFA *dfa;
 

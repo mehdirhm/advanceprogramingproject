@@ -194,6 +194,7 @@ void scenegraphic::mouseReleaseEvent(QMouseEvent *event){
               ed = new Edge( sourceNode ,destNode );
                ed->adjust();
               scene->addItem( ed );
+              edgeListView<<ed;
 //                sourceNode->addEdge(ed);
 
               li=new QLineEdit;
@@ -237,8 +238,13 @@ void scenegraphic::mouseMoveEvent(QMouseEvent *event){
             QList <Edge*> edgelist = isPressedAnyCircle->getEdges();
             for ( Edge* edge : qAsConst(edgelist) ){
                 edge->adjust();
+
+            }
+            for ( Edge* edgeView : qAsConst( edgeListView ) ){
+                edgeView->adjust();
             }
         }
+        scene->update();
     }
 
     if( scenegraphic::isEdgeButtonActived() ){
