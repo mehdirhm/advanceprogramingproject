@@ -111,6 +111,7 @@ private:
     bool DfaMachine=true;
     DFA *dfa=nullptr;
         QList < Edge* > edgeListView;
+        bool checkEmptyLine=false;
 
 //    DFA *dfa;
 

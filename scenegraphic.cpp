@@ -109,9 +109,14 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
     }
     if ( scenegraphic::isEdgeButtonActived()  ){
-        if ( Node* node = isInAnyCircle( scenePt ) ){
-            isPressedAnyCircle = node;
-        }
+
+
+            if ( Node* node = isInAnyCircle( scenePt ) ){
+                isPressedAnyCircle = node;
+            }
+
+
+
 
     }
     if ( scenegraphic::isSelectButtonActived()){
@@ -181,7 +186,7 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
     if(IsCal()){
 
-        dfa->checkInput("01110");
+        dfa->checkInput("11101");
     }
 }
 
@@ -189,30 +194,38 @@ void scenegraphic::mouseReleaseEvent(QMouseEvent *event){
     QPointF scenePt = mapToScene(event->pos());
 
     if ( scenegraphic::isEdgeButtonActived() ){
-      if ( Node* sourceNode = isPressedAnyCircle ){
-          if ( Node * destNode = isInAnyCircle( scenePt ) ){
-              ed = new Edge( sourceNode ,destNode );
-               ed->adjust();
-              scene->addItem( ed );
-              edgeListView<<ed;
-//                sourceNode->addEdge(ed);
 
-              li=new QLineEdit;
-                           scene->addWidget(li);
-                           li->resize(120,20);
-                            QLine line(sourceNode->getCenterPoint().x()+RAD/2,sourceNode->getCenterPoint().y()+RAD/2 ,destNode->getCenterPoint().x()+RAD/2,destNode->getCenterPoint().y()+RAD/2);
-                           li->move(line.center());
-                           li->setFocus();
-                      connect(li,SIGNAL(returnPressed()),this,SLOT(customSlot()));
+            if ( Node* sourceNode = isPressedAnyCircle ){
+                if ( Node * destNode = isInAnyCircle( scenePt ) ){
+                    ed = new Edge( sourceNode ,destNode );
+                     ed->adjust();
+                    scene->addItem( ed );
+                    edgeListView<<ed;
+      //                sourceNode->addEdge(ed);
+
+                    li=new QLineEdit;
+
+                                 scene->addWidget(li);
+                                 scenegraphic::setEdgeButtonDeactive();
+                                 li->resize(120,20);
+                                  QLine line(sourceNode->getCenterPoint().x()+RAD/2,sourceNode->getCenterPoint().y()+RAD/2 ,destNode->getCenterPoint().x()+RAD/2,destNode->getCenterPoint().y()+RAD/2);
+                                 li->move(line.center());
+                                li->setFocus();
+
+
+                            connect(li,SIGNAL(returnPressed()),this,SLOT(customSlot()));
 
 
 
-          }
-          //Line which draw onTime
-          scene->removeItem( tempLine );
-          tempLine = nullptr;
-          isPressedAnyCircle = nullptr;
-      }
+                }
+                //Line which draw onTime
+                scene->removeItem( tempLine );
+                tempLine = nullptr;
+                isPressedAnyCircle = nullptr;
+            }
+
+
+
 
     }
 
@@ -248,11 +261,16 @@ void scenegraphic::mouseMoveEvent(QMouseEvent *event){
     }
 
     if( scenegraphic::isEdgeButtonActived() ){
-        if ( isPressedAnyCircle ){
-            scene->removeItem( tempLine );
-            tempLine = new QGraphicsLineItem( QLineF( isPressedAnyCircle->getCenterPoint() ,scenePt ) );
-            scene->addItem( tempLine );
-        }
+
+
+            if ( isPressedAnyCircle ){
+                scene->removeItem( tempLine );
+                tempLine = new QGraphicsLineItem( QLineF( isPressedAnyCircle->getCenterPoint() ,scenePt ) );
+                scene->addItem( tempLine );
+            }
+
+
+
     }
 
     scene-> update();
@@ -388,8 +406,16 @@ void scenegraphic::customSlot()
 // QByteArray ba = st.toLocal8Bit();
 //  const char *c_str2 = ba.data();
 
+//while(st.isEmpty()){
+//    checkEmptyLine=true;
+//}
 
+ if(st.isEmpty()){
+     checkEmptyLine=true;
+ }
+checkEmptyLine=false;
     li->setVisible(false);
+    scenegraphic::setEdgeButtonActive();
 
 ed->addText(st);
 
