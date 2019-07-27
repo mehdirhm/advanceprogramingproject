@@ -12,7 +12,7 @@ private:
 
 public:
     DFA();
-    void checkInput(QString );
+    bool checkInput(QString );
 
 
 

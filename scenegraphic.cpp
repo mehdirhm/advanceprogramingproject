@@ -3,6 +3,8 @@
 #include<iostream>
 #include <machine.hpp>
 #include<QScopedPointer>
+#include"mainwindow.h"
+#include"dfa.hpp"
 
 bool scenegraphic::edgeButtonActived    = false;
 bool scenegraphic::nodeButtonActived    = false;
@@ -10,6 +12,7 @@ bool scenegraphic::selectButtonActived  = false;
 bool scenegraphic::initialButtonActived = false;
 bool scenegraphic::finalButtonActived   = false;
 bool scenegraphic::calculate=false;
+DFA * scenegraphic::dfa=nullptr;
 
 
 scenegraphic::scenegraphic(QWidget* parent):QGraphicsView (parent)
@@ -186,7 +189,7 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
     if(IsCal()){
 
-        dfa->checkInput("11101");
+//        dfa->checkInput(MainWindow::GetInputCheck());
     }
 }
 
@@ -208,7 +211,9 @@ void scenegraphic::mouseReleaseEvent(QMouseEvent *event){
                                  scene->addWidget(li);
                                  scenegraphic::setEdgeButtonDeactive();
                                  li->resize(120,20);
-                                  QLine line(sourceNode->getCenterPoint().x()+RAD/2,sourceNode->getCenterPoint().y()+RAD/2 ,destNode->getCenterPoint().x()+RAD/2,destNode->getCenterPoint().y()+RAD/2);
+                                 QLine line(ed->getSourcePoint().x()+RAD/2,ed->getSourcePoint().y()+RAD/2,ed->getDestPoint().x()+RAD/2,ed->getDestPoint().y()+RAD/2);
+
+//                                 QLine line(sourceNode->getCenterPoint().x()+RAD/2,sourceNode->getCenterPoint().y()+RAD/2 ,destNode->getCenterPoint().x()+RAD/2,destNode->getCenterPoint().y()+RAD/2);
                                  li->move(line.center());
                                 li->setFocus();
 
@@ -410,10 +415,8 @@ void scenegraphic::customSlot()
 //    checkEmptyLine=true;
 //}
 
- if(st.isEmpty()){
-     checkEmptyLine=true;
- }
-checkEmptyLine=false;
+
+
     li->setVisible(false);
     scenegraphic::setEdgeButtonActive();
 

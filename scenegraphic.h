@@ -66,7 +66,9 @@ public:
     static void setCalDeactive();
     static bool IsCal();
 
-
+    static DFA * GetDfaMachine(){
+        return dfa;
+    };
 
 
     Node* isInAnyCircle(QPointF);
@@ -97,7 +99,7 @@ private:
     static bool initialButtonActived;
     static bool SelectStartNode;
     static bool Getinput;
-
+ static DFA * dfa;
     static bool calculate;
     QLineEdit *li=nullptr;
     QLineEdit *line=nullptr;
@@ -109,7 +111,7 @@ private:
     Node *startNode=nullptr;
     Node *finalNode=nullptr;
     bool DfaMachine=true;
-    DFA *dfa=nullptr;
+
         QList < Edge* > edgeListView;
         bool checkEmptyLine=false;
 

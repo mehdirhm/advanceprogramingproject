@@ -106,13 +106,13 @@
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>30</y>
+      <y>20</y>
       <width>80</width>
-      <height>23</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string>calculare</string>
+     <string>Add Input</string>
     </property>
    </widget>
   </widget>

@@ -6,6 +6,7 @@
 #include<QPainter>
 #include<QPaintEvent>
 #include<QLineEdit>
+#include"dfa.hpp"
 namespace Ui {
 class MainWindow;
 }
@@ -17,11 +18,16 @@ class MainWindow : public QMainWindow
 public:
 
 
+    static QString GetInputCheck(){
+        return InputForCheck;
+    }
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void handleInput();
 
 private slots:
+    void HandleInputCheck();
+
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
@@ -41,10 +47,13 @@ private slots:
     void on_pushButton_5_clicked();
 
 private:
+    static QString InputForCheck;
     Ui::MainWindow *ui;
     QGraphicsScene * scene;
     QLineEdit *li;
+    QLineEdit *line=nullptr;
     QString input;
+
 };
 
 #endif // MAINWINDOW_H

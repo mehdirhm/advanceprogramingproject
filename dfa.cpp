@@ -9,7 +9,8 @@ DFA::DFA(){
 }
 
 
-void DFA::checkInput(QString input){
+bool DFA::checkInput(QString input){
+
     int counter_for_input=0;
     int i=0;
 
@@ -61,9 +62,11 @@ currentNode=startNode;
 
         if(currentNode==final){
             std::cout<<"accept"<<std::endl;
+            return true;
         }
         if(currentNode!=final){
             std::cout<<"reject"<<std::endl;
+            return false;
         }
 
 

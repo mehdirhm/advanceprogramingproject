@@ -44,6 +44,15 @@ public:
     void setTrueDup();
     bool GetDupBool();
    QPointF CenterOfLine(void)const ;
+   QPointF getSourcePoint(){
+
+       return sourcePoint;
+   };
+
+   QPointF getDestPoint(){
+
+       return destPoint;
+   };
 
 };
 

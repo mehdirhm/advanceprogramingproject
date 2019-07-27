@@ -4,7 +4,8 @@
 #include"dfa.hpp"
 #include<QMouseEvent>
 #include<QLineEdit>
-
+#include <QLabel>
+QString MainWindow::InputForCheck="";
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -17,6 +18,7 @@ MainWindow::~MainWindow()
     delete ui;
     delete  scene;
     delete li;
+    delete line;
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -70,13 +72,7 @@ void MainWindow::on_pushButton_3_clicked()
 //{
 
 //}
-void MainWindow::handleInput(){
 
-
-
-
-
-}
 
 void MainWindow::on_actionGet_Input_triggered()
 {
@@ -117,6 +113,62 @@ void MainWindow::on_pushButton_7_clicked()
     scenegraphic::setSelectButtonDeactive();
     scenegraphic::setInitialButtonDeactive();
     scenegraphic::setCalActive();
+    if(scenegraphic::GetDfaMachine()){
+        line=new QLineEdit;
+
+        QPoint start(200,400);
+        line->setFixedWidth(500);
+
+    line->setWindowTitle("ورودی مورد نظر به ماشین تورینگ را وارد کنید:");
+
+         line->move(mapFromGlobal(start));
+        line->setVisible(true);
+
+    //    connect(li,SIGNAL(returnPressed()),this,SLOT(HandleInputCheck()));
+       connect(line,SIGNAL(returnPressed()),this,SLOT(HandleInputCheck()));
+
+
+
+    }
+    else {
+        QLabel * label=new QLabel;
+        label->setWindowTitle("خطا");
+        label->move(350,400);
+
+
+        label->setText("ابتدا یک ماشین ترسیم کنید!");
+        label->setVisible(true);
+
+    }
+
+
+
+}
+
+void MainWindow::HandleInputCheck(){
+
+   QString st=line->text();
+    InputForCheck=st;
+    line->setVisible(false);
+    if(scenegraphic:: GetDfaMachine()->checkInput(InputForCheck)){
+        QLabel * lab=new QLabel;
+         lab->move(350,400);
+          li->setWindowTitle("بررسی ورودی ها:");
+        lab->setText("Accept!!!!");
+        lab->setVisible(true);
+    }
+    else {
+        QLabel * lab=new QLabel;
+        lab->setText("Reject!!!!");
+        li->setWindowTitle("بررسی ورودی ها:");
+        lab->move(350,400);
+        lab->setVisible(true);
+
+    }
+
+
+
+
 
 
 
