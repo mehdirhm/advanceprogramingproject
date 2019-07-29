@@ -13,6 +13,9 @@ bool scenegraphic::initialButtonActived = false;
 bool scenegraphic::finalButtonActived   = false;
 bool scenegraphic::calculate=false;
 DFA * scenegraphic::dfa=nullptr;
+Turing * scenegraphic::turing=nullptr;
+bool scenegraphic::TuringMachine=false;
+bool scenegraphic::DfaMachine=false;
 
 
 scenegraphic::scenegraphic(QWidget* parent):QGraphicsView (parent)
@@ -93,7 +96,11 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
 
 
+            }if(GetIsTuring()){
+                turing=new Turing;
+                turing->addNode(node);
             }
+
 //            machine->addNode(node);
 //            dfa->addNode(startNode);
             nodes<<node;
@@ -139,6 +146,9 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
             if(GetIsDfa()){
                  dfa->setStartNode(startNode);
             }
+            if(GetIsTuring()){
+                turing->setStartNode(startNode);
+            }
 
             startNode->setSelected(true);
 //            const QList<QGraphicsItem *> items = scene->items();
@@ -162,6 +172,9 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
             finalNode->setIsFinal();
             if(GetIsDfa()){
                  dfa->setFinalNode(finalNode);
+            }
+            if(GetIsTuring()){
+                turing->setFinalNode(finalNode);
             }
 
             finalNode->setSelected(true);

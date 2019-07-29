@@ -12,7 +12,7 @@ namespace AM {
         QList<Node*> nodes;
         Node* currentNode;
         Node* startNode;
-        Node* final;
+        QList <Node *> final;
     public:
 
         Machine();
@@ -21,7 +21,7 @@ namespace AM {
         virtual ~Machine(){
             delete currentNode;
             delete startNode;
-            delete final;
+//            delete final;
             nodes.clear();
 
         };

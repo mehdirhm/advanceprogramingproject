@@ -60,14 +60,38 @@ currentNode=startNode;
 
        }
 
-        if(currentNode==final){
-            std::cout<<"accept"<<std::endl;
-            return true;
+
+
+
+
+
+
+
+        for(Node * node : final){
+            if(currentNode==node){
+                std::cout<<"accept"<<std::endl;
+                return true;
+            }
+
+
+
+
+
+
         }
-        if(currentNode!=final){
-            std::cout<<"reject"<<std::endl;
-            return false;
-        }
+
+        return false;
+
+
+
+
+
+
+
+//        if(currentNode!=final){
+//            std::cout<<"reject"<<std::endl;
+//            return false;
+//        }
 
 
     }

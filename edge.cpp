@@ -3,7 +3,7 @@
 #include <math.h>
 #include <iostream>
 #include <QTextItem>
-Edge::Edge( Node* sourceNode ,Node* destNode ):QGraphicsItem ( nullptr ),arrowSize(10),isDup(false),likeEdge(false){
+Edge::Edge( Node* sourceNode ,Node* destNode ):QGraphicsItem ( nullptr ),arrowSize(10),isDup(false),likeEdge(false),checkForSameEdgeCounter(0){
     this->sourceNode = sourceNode;
     this->destNode = destNode;
     sourcePoint = sourceNode->getCenterPoint();
@@ -47,36 +47,39 @@ void Edge::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
 
 
+ if ( checkForSameEdgeCounter++ < 1 ) {
+
+     QList<Edge*> sourceEdges = sourceNode->getEdges();
+     for ( Edge* edge : qAsConst(sourceEdges) ){
+
+         QList<Edge*> destEdges = edge->getDestNode()->getEdges();
+         for ( Edge* destEdge : qAsConst(destEdges) ){
+             if ( destEdge->destNode == edge->sourceNode ) {
+                 destEdge->setTrueDup();
+                 edge->setTrueDup();
+             }
+         }
+
+         ////checking for prevent repet edge
+         if ( edge->destNode == this->destNode && edge != this ){
+                 if ( sourceNode == destNode ){
+                     QLineF lin(sourceNode->getCenterPoint(),destNode->getCenterPoint());
+                     painter->drawText(lin.center(),edgeValue);
+
+                      update();
+                 }
+                 else {
+                     QLineF line( sourcePoint ,destPoint );
+
+                     painter->drawText( line.center() ,edgeValue);
+                 }
+                 likeEdge = true;
+
+         }
+     }
+ }
 
 
-    QList<Edge*> sourceEdges = sourceNode->getEdges();
-    for ( Edge* edge : qAsConst(sourceEdges) ){
-
-        QList<Edge*> destEdges = edge->getDestNode()->getEdges();
-        for ( Edge* destEdge : qAsConst(destEdges) ){
-            if ( destEdge->destNode == edge->sourceNode ) {
-                destEdge->setTrueDup();
-                edge->setTrueDup();
-            }
-        }
-
-        ////checking for prevent repet edge
-        if ( edge->destNode == this->destNode && edge != this ){
-                if ( sourceNode == destNode ){
-                    QLineF lin(sourceNode->getCenterPoint(),destNode->getCenterPoint());
-                    painter->drawText(lin.center(),edgeValue);
-
-                     update();
-                }
-                else {
-                    QLineF line( sourcePoint ,destPoint );
-
-                    painter->drawText( line.center() ,edgeValue);
-                }
-                likeEdge = true;
-
-        }
-    }
 
 
 // checking duplicate edge and like edge for prevent repet

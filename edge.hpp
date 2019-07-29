@@ -18,6 +18,7 @@ private:
     QString edgeValue;
     bool isDup;
       bool likeEdge ;
+        unsigned int checkForSameEdgeCounter;
 
 
 protected:
@@ -32,6 +33,8 @@ public:
         delete destNode;
 
     }
+
+    void checkForSameEdge( QPainter* );
 
     Node* getSourceNode() const;
     Node* getDestNode() const;

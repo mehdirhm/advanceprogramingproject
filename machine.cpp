@@ -27,7 +27,8 @@ void AM::Machine::setCurrentNode( Node* node){
 
 
 void AM::Machine::setFinalNode(Node * node){
-    final=node;
+    final << node;
+
 }
 
 void AM::Machine:: addNode(Node * node){

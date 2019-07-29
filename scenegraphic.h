@@ -13,6 +13,7 @@
 #include<QLineEdit>
 #include"machine.hpp"
 #include <dfa.hpp>
+#include <turing.hpp>
 
 
 class scenegraphic:public QGraphicsView
@@ -70,12 +71,26 @@ public:
         return dfa;
     };
 
+    static Turing * GetTuringMachine(){
+        return turing;
+    }
+
 
     Node* isInAnyCircle(QPointF);
     Node* isInAnyNode( QPointF);
   QList <Node *> nodes;
-  bool GetIsDfa(){
+  static bool GetIsDfa(){
       return DfaMachine;
+  }
+  static bool GetIsTuring(){
+      return turing;
+  }
+
+  static void SetISDfa(){
+      DfaMachine=true;
+  }
+  static void SetIsTuring(){
+      TuringMachine=true;
   }
 
 protected:
@@ -100,6 +115,7 @@ private:
     static bool SelectStartNode;
     static bool Getinput;
  static DFA * dfa;
+ static Turing * turing;
     static bool calculate;
     QLineEdit *li=nullptr;
     QLineEdit *line=nullptr;
@@ -110,7 +126,8 @@ private:
     Edge* ed=nullptr;
     Node *startNode=nullptr;
     Node *finalNode=nullptr;
-    bool DfaMachine=true;
+    static bool DfaMachine;
+    static bool TuringMachine;
 
         QList < Edge* > edgeListView;
         bool checkEmptyLine=false;

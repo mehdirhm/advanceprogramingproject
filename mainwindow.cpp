@@ -16,9 +16,9 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete  scene;
-    delete li;
+
     delete line;
+    delete lab;
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -113,7 +113,7 @@ void MainWindow::on_pushButton_7_clicked()
     scenegraphic::setSelectButtonDeactive();
     scenegraphic::setInitialButtonDeactive();
     scenegraphic::setCalActive();
-    if(scenegraphic::GetDfaMachine()){
+    if(scenegraphic::GetIsDfa()){
         line=new QLineEdit;
 
         QPoint start(200,400);
@@ -130,14 +130,31 @@ void MainWindow::on_pushButton_7_clicked()
 
 
     }
+    if(scenegraphic::GetIsTuring()){
+
+        line=new QLineEdit;
+
+        QPoint start(200,400);
+        line->setFixedWidth(500);
+
+    line->setWindowTitle("ورودی مورد نظر به ماشین تورینگ را وارد کنید:");
+
+         line->move(mapFromGlobal(start));
+        line->setVisible(true);
+
+    //    connect(li,SIGNAL(returnPressed()),this,SLOT(HandleInputCheck()));
+       connect(line,SIGNAL(returnPressed()),this,SLOT(HandleInputCheck()));
+
+
+    }
     else {
-        QLabel * label=new QLabel;
-        label->setWindowTitle("خطا");
-        label->move(350,400);
+        QLabel * labe=new QLabel;
+        labe->setWindowTitle("خطا");
+        labe->move(350,400);
 
 
-        label->setText("ابتدا یک ماشین ترسیم کنید!");
-        label->setVisible(true);
+        labe->setText("ابتدا یک ماشین ترسیم کنید!");
+        labe->setVisible(true);
 
     }
 
@@ -150,22 +167,45 @@ void MainWindow::HandleInputCheck(){
    QString st=line->text();
     InputForCheck=st;
     line->setVisible(false);
-    if(scenegraphic:: GetDfaMachine()->checkInput(InputForCheck)){
-        QLabel * lab=new QLabel;
-         lab->move(350,400);
-          li->setWindowTitle("بررسی ورودی ها:");
-        lab->setText("Accept!!!!");
-        lab->setVisible(true);
-    }
-    else {
-        QLabel * lab=new QLabel;
-        lab->setText("Reject!!!!");
-        li->setWindowTitle("بررسی ورودی ها:");
-        lab->move(350,400);
-        lab->setVisible(true);
+
+    if(scenegraphic::GetIsDfa()){
+        if(scenegraphic:: GetDfaMachine()->checkInput(InputForCheck)){
+            lab=new QLabel;
+            lab->move(350,400);
+             lab->setWindowTitle("بررسی ورودی ها:");
+           lab->setText("Accept!!!!");
+           lab->setVisible(true);
+        }
+
+        else {
+            lab=new QLabel;
+            lab->setText("Reject!!!!");
+            lab->setWindowTitle("بررسی ورودی ها:");
+            lab->move(350,400);
+            lab->setVisible(true);
+
+        }
 
     }
+    if(scenegraphic::GetIsTuring()){
+        if(scenegraphic:: GetTuringMachine()->CheckInput(InputForCheck)){
+            lab=new QLabel;
+            lab->move(350,400);
+             lab->setWindowTitle("بررسی ورودی ها:");
+           lab->setText("Accept!!!!");
+           lab->setVisible(true);
+        }
 
+        else {
+            lab=new QLabel;
+            lab->setText("Reject!!!!");
+            lab->setWindowTitle("بررسی ورودی ها:");
+            lab->move(350,400);
+            lab->setVisible(true);
+
+        }
+
+    }
 
 
 

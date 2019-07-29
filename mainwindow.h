@@ -6,6 +6,7 @@
 #include<QPainter>
 #include<QPaintEvent>
 #include<QLineEdit>
+#include<QLabel>
 #include"dfa.hpp"
 namespace Ui {
 class MainWindow;
@@ -49,9 +50,10 @@ private slots:
 private:
     static QString InputForCheck;
     Ui::MainWindow *ui;
-    QGraphicsScene * scene;
-    QLineEdit *li;
+//    QGraphicsScene * scene;
+//    QLineEdit *li=nullptr;
     QLineEdit *line=nullptr;
+     QLabel * lab=nullptr;
     QString input;
 
 };

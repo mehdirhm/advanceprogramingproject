@@ -3,14 +3,29 @@
 
 
 #include "./machine.hpp"
+#include <vector>
 
-class Turing
+class Turing : public AM::Machine
 {
 private:
+    std::vector <QString> rightHalf;
+    std::vector <QString> leftHalf;
+
+    int Head=0;
+    Node * final=nullptr;
+
+
+
+
+
+
 
 public:
+
+
+    bool CheckInput(QString);
     Turing();
-    ~Turing();
+
 };
 
 
