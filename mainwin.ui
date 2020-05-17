@@ -67,7 +67,7 @@ color:&quot;white&quot;</string>
      </rect>
     </property>
     <property name="text">
-     <string>درباره ما</string>
+     <string>ارتباط با من</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_5">

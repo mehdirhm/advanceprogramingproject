@@ -13,6 +13,7 @@ private:
 
     int Head=0;
     Node * final=nullptr;
+    Node * prevNode=nullptr;
 
 
 

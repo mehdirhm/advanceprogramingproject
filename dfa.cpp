@@ -9,6 +9,7 @@ DFA::DFA(){
 }
 
 
+
 bool DFA::checkInput(QString input){
 
     int counter_for_input=0;

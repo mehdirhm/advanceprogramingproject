@@ -32,57 +32,66 @@ bool Turing::CheckInput(QString input){
 currentNode=startNode;
 bool i=false;
 
-        while(currentNode!=final){
+do{
 
 
-            for(Edge * edge : currentNode->getEdges()){
+    for(Edge * edge : currentNode->getEdges()){
 
 
 if(Head>=0){
 
-          if(edge->GetEdgeValue()[0]==rightHalf[0]){
-              i=true;
+  if(edge->GetEdgeValue()[0]==rightHalf[0]){
+      i=true;
+
+//if(edge->GetEdgeValue()[1]=="#"){
+//    rightHalf[Head]=edge->GetEdgeValue()[1]
+
+//}
+      rightHalf[Head]=edge->GetEdgeValue()[1];
+
+      if(edge->GetEdgeValue()[2]=='R'){
+
+          Head++;
+      }
+      if(edge->GetEdgeValue()[2]=='L'){
+
+          Head--;
+      }
 
 
-              rightHalf[Head]=edge->GetEdgeValue()[1];
-              if(edge->GetEdgeValue()[2]=='R'){
-
-                  Head++;
-              }
-              if(edge->GetEdgeValue()[2]=='L'){
-
-                  Head--;
-              }
-
-
-
-                  currentNode=edge->getDestNode();
+          prevNode=currentNode;
+          currentNode=edge->getDestNode();
 
 
 //
 
 
-            }
+    }
+
+  else {
+      prevNode=currentNode;
+  }
 
 }
 
 else {
-    Head=0;
-    if(edge->GetEdgeValue()[0]==leftHalf[0]){
+Head=0;
+if(edge->GetEdgeValue()[0]==leftHalf[0]){
 
-        leftHalf[Head]=edge->GetEdgeValue()[1];
-        if(edge->GetEdgeValue()[2]=='R'){
+leftHalf[Head]=edge->GetEdgeValue()[1];
+if(edge->GetEdgeValue()[2]=='R'){
 
-            Head++;
-        }
-        if(edge->GetEdgeValue()[2]=='L'){
+    Head++;
+}
+if(edge->GetEdgeValue()[2]=='L'){
 
-            Head--;
-        }
+    Head--;
+}
 
 
+    prevNode=currentNode;
+    currentNode=edge->getDestNode();
 
-            currentNode=edge->getDestNode();
 
 
 
@@ -90,37 +99,40 @@ else {
 //
 
 
-      }
+}
+
+else {
+prevNode=currentNode;
+}
 
 }
 
 
 
-            }
+    }
 
-            if(i==false){
-                return false;
-            }
-
-
-            if(currentNode->getIsFinal()){
-                std::cout<<"Accept"<<std::endl;
-                return true;
-            }
-
-
-
-
-
-
-
-
-
-
-
-
+    if(i==false){
         return false;
+    }
 
+
+    if(currentNode->getIsFinal()){
+        std::cout<<"Accept"<<std::endl;
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+return false;
 
 
 
@@ -129,6 +141,8 @@ else {
 
 
 }
+
+        while(prevNode!=currentNode);
 }
 
 

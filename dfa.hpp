@@ -14,6 +14,13 @@ public:
     DFA();
     bool checkInput(QString );
 
+    bool getNode(){
+        if(startNode){
+            return false;
+        }
+        return true;
+     }
+
 
 
 };

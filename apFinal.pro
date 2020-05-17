@@ -25,8 +25,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        aboutme.cpp \
         dfa.cpp \
         edge.cpp \
+        guidepage.cpp \
         machine.cpp \
         main.cpp \
         mainwin.cpp \
@@ -36,8 +38,10 @@ SOURCES += \
         turing.cpp
 
 HEADERS += \
+        aboutme.h \
         dfa.hpp \
         edge.hpp \
+        guidepage.h \
         machine.hpp \
         mainwin.h \
         mainwindow.h \
@@ -46,6 +50,8 @@ HEADERS += \
         turing.hpp
 
 FORMS += \
+        aboutme.ui \
+        guidepage.ui \
         mainwin.ui \
         mainwindow.ui
 

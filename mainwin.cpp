@@ -2,6 +2,8 @@
 #include "ui_mainwin.h"
 #include <mainwindow.h>
 #include "scenegraphic.h"
+#include"guidepage.h"
+#include "aboutme.h"
 
 MainWin::MainWin(QWidget *parent) :
     QMainWindow(parent),
@@ -29,5 +31,26 @@ void MainWin::on_pushButton_2_clicked()
     hide();
     scenegraphic::SetIsTuring();
     main->show();
+
+}
+
+void MainWin::on_pushButton_6_clicked()
+{
+   close();
+}
+
+void MainWin::on_pushButton_3_clicked()
+{
+    GuidePage *Guide=new GuidePage;
+    hide();
+    Guide->show();
+
+}
+
+void MainWin::on_pushButton_4_clicked()
+{
+     aboutme * about=new aboutme;
+     hide();
+     about->show();
 
 }

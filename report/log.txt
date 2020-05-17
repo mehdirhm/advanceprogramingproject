@@ -1,0 +1,77 @@
+commit d378aceadd4bd4deb7f52eead531cee1e8cde54e
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Mon Jul 29 17:18:39 2019 +0430
+
+    implemention of truring machine
+
+commit 5c68d78ea30d8cd91d2b5087a78a3e88a6102813
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Sat Jul 27 11:41:37 2019 +0430
+
+    complete DFA Machine
+
+commit 74c9774456f5310650bc9a852e33bced2a3cef6f
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Fri Jul 26 16:46:33 2019 +0430
+
+    fix QlineEdit when add edge
+
+commit 00779ed5b7c484f3289c9ada2c78c6147d0c35b6
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Fri Jul 26 14:45:50 2019 +0430
+
+    improve Ui version 2
+
+commit c07348d6db92467fcc9a299d20705849a63cc019
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Fri Jul 26 11:36:42 2019 +0430
+
+    improve drag and drop
+
+commit 1c586853dc101b59b077b74471f0f7de7b8f0192
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Thu Jul 25 00:55:11 2019 +0430
+
+    Implementation logic check input for dfa machine
+
+commit 84560d1bbe34d396cc3f10a1986335f2e5cb22e3
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Thu Jul 25 00:42:45 2019 +0430
+
+    Implementation logic check input for dfa machine
+
+commit dc3252d15c4bf02f9e4e89fdb3855a5b0b1c03d3
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Wed Jul 24 03:01:10 2019 +0430
+
+    set zoomIn and ZoomOut and implemntion of function checkInput
+
+commit 8ffad5c8312aebbc7d3c76378bdafb0a736c9995
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Tue Jul 23 13:06:02 2019 +0430
+
+    inpelmemtion of input and check input
+
+commit fcb4f3c85455db96e0d92022793c3e8493081d29
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Mon Jul 22 02:36:41 2019 +0430
+
+    work on the select node and input
+
+commit 9f5e1be366e83ab82b93658a218a3b1ac7b406a2
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Sun Jul 21 15:35:20 2019 +0430
+
+    implemention state name and arrow
+
+commit 3a96b68abf526eef2ff9d930db936ed39a8cd8f4
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Sun Jul 21 01:37:34 2019 +0430
+
+    inplemention arrow and move edge
+
+commit 9185b1cb6908f3db839d2f8b2c7eda327ee89463
+Author: mehdirahimi <mahdi.r803@yahoo.com>
+Date:   Sat Jul 20 03:40:04 2019 +0430
+
+    end of drag

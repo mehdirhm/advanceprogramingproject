@@ -11,7 +11,7 @@ namespace AM {
         protected:
         QList<Node*> nodes;
         Node* currentNode;
-        Node* startNode;
+        Node* startNode=nullptr;
         QList <Node *> final;
     public:
 
@@ -34,6 +34,8 @@ namespace AM {
 
 
         void addNode(Node *);
+
+
     };
 }
 

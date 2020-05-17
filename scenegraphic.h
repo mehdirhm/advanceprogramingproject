@@ -66,6 +66,9 @@ public:
     static void setCalActive();
     static void setCalDeactive();
     static bool IsCal();
+    static bool getInputActive(){
+        return inputActive;
+    }
 
     static DFA * GetDfaMachine(){
         return dfa;
@@ -83,7 +86,7 @@ public:
       return DfaMachine;
   }
   static bool GetIsTuring(){
-      return turing;
+      return TuringMachine;
   }
 
   static void SetISDfa(){
@@ -91,6 +94,10 @@ public:
   }
   static void SetIsTuring(){
       TuringMachine=true;
+  }
+
+  static bool getInputActive1(){
+      return inputActive1;
   }
 
 protected:
@@ -114,6 +121,8 @@ private:
     static bool initialButtonActived;
     static bool SelectStartNode;
     static bool Getinput;
+    static bool inputActive;
+    static bool inputActive1;
  static DFA * dfa;
  static Turing * turing;
     static bool calculate;

@@ -5,7 +5,7 @@
 #include<QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsEllipseItem>
-#define RAD 35
+#define RAD 40
 
 
 Node::Node( qreal x, qreal y )
@@ -38,11 +38,31 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->drawEllipse( boundingRect() );
     painter->setBrush(QBrush() );
     QPointF p (-5,5);
+     QPointF f (-12,5);
+if(isStart){
+    painter->setBrush(QBrush(Qt::yellow, Qt::SolidPattern));
+    painter->drawEllipse( boundingRect() );
+    painter->setBrush(QBrush() );
+    s="Start";
+    painter->drawText(getCenterPoint()+f,s);
 
+}
+else if(isFinal){
+    painter->setBrush(QBrush(Qt::blue, Qt::SolidPattern));
+    painter->drawEllipse( boundingRect() );
+    painter->setBrush(QBrush() );
+    s="Final";
+    painter->drawText(getCenterPoint()+f,s);
+
+}
+else  {
      s="s"+QString::number(Node::getCounter());
+      painter->drawText(getCenterPoint()+p,s);
+}
+
 
 //std::cout<<Node::getCounter()<<std::endl;
-    painter->drawText(getCenterPoint()+p,s);
+
 
 
 

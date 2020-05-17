@@ -16,6 +16,8 @@ DFA * scenegraphic::dfa=nullptr;
 Turing * scenegraphic::turing=nullptr;
 bool scenegraphic::TuringMachine=false;
 bool scenegraphic::DfaMachine=false;
+bool scenegraphic::inputActive=false;
+bool scenegraphic::inputActive1=false;
 
 
 scenegraphic::scenegraphic(QWidget* parent):QGraphicsView (parent)
@@ -88,6 +90,7 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
 
             if ( !isInAnyNode( node->getCenterPoint() ) ){
             scene->addItem( node );
+            inputActive=true;
             if(GetIsDfa()){
                 dfa=new DFA;
                 dfa->addNode(node);
@@ -143,6 +146,17 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
             startNode = node;
 //            machine->setStartNode(startNode);
             startNode->setIsStart();
+            startNode->update();
+            scene->update();
+
+//            startNode->setOpacity(0.5);
+//            scene->removeItem(startNode);
+//            scene->update();
+//            startNode->setNameNode("Start Node");
+//            scene->addItem(startNode);
+//           scene->addItem(&*startNode);
+
+
             if(GetIsDfa()){
                  dfa->setStartNode(startNode);
             }
@@ -170,6 +184,8 @@ void scenegraphic::mousePressEvent(QMouseEvent *event){
             finalNode = node;
 //            machine->setStartNode(startNode);
             finalNode->setIsFinal();
+            finalNode->update();
+            scene->update();
             if(GetIsDfa()){
                  dfa->setFinalNode(finalNode);
             }
@@ -214,6 +230,7 @@ void scenegraphic::mouseReleaseEvent(QMouseEvent *event){
             if ( Node* sourceNode = isPressedAnyCircle ){
                 if ( Node * destNode = isInAnyCircle( scenePt ) ){
                     ed = new Edge( sourceNode ,destNode );
+                    inputActive1=true;
                      ed->adjust();
                     scene->addItem( ed );
                     edgeListView<<ed;

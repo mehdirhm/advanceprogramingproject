@@ -26,6 +26,10 @@ private:
 static int counter;
 
 public:
+void setNameNode(QString name){
+    s=name;
+
+}
 int getLenth(){
     return edgeList.length();
 }
